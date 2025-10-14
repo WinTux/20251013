@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "EjemplosIntroductorios": {
+      "commandName": "Project",
+      "commandLineArgs": "abc 123 xyz102"
+    }
+  }
+}
