@@ -1,8 +1,13 @@
 ﻿
 
 
+
 namespace EjemplosIntroductorios
 {
+    using Models;
+    using Universidad.Postgrado;
+    // Usando alias en los usings
+    using Est = Universidad.Pregrado.Estudiante;
     internal class Program
     {
         static void Main(string[] args)
@@ -11,7 +16,20 @@ namespace EjemplosIntroductorios
 
             //ejemplo2(args);
 
-            ejemplo3();
+            //ejemplo3();
+
+            ejemplo4();
+        }
+
+        private static void ejemplo4()
+        {
+            // Inicializando una Persona
+            Persona per = new Persona();
+            Cliente c01 = new Cliente();
+            Est e01 = new Est();
+            Estudiante e02 = new Estudiante();
+            Tesis t01 = new Tesis("analisis lógico");
+            Herramientas.Comunes.Conversor conv = new Herramientas.Comunes.Conversor();
         }
 
         private static void ejemplo3()
@@ -107,9 +125,36 @@ namespace EjemplosIntroductorios
             int j = 0;
             while (j < numeros.Length)
             {
-                Console.WriteLine(numeros[j]);
-                j++;
+                Console.WriteLine(numeros[j++]);
+                //j++;
             }
+            // Recorriendo con foreach
+            Console.WriteLine("Recorrido del arreglo unidimensional con foreach:");
+            foreach (int numero in numeros)
+                Console.WriteLine(numero);
+            Console.WriteLine("Fin del recorrido de arreglos");
+
+            // Ejemplo recorriendo índices pares en un arreglo
+            Console.WriteLine("Recorrido de índices pares en el arreglo:");
+            for (int i = 0; i < numeros.Length; i += 2)
+            {
+                Console.WriteLine(numeros[i]);
+                if (i == 100) // Condición que genera un bucle infinito para arreglos de 100 o más casillas.
+                    i = 0;
+            }
+            // Tipos de incrementos
+            Console.WriteLine("Incremento/Decremento postfijo:");
+            int a = 5;
+            Console.WriteLine(a++); // Muestra 5, luego a es 6
+            Console.WriteLine(a);   // Muestra 6
+            Console.WriteLine(a--); // Muestra 6, luego a es 5
+            Console.WriteLine(a);   // Muestra 5
+            Console.WriteLine("Incremento/Decremento prefijo:");
+            int b = 5;
+            Console.WriteLine(++b); // Primero incrementa b a 6, luego muestra 6
+            Console.WriteLine(b);   // Muestra 6
+            Console.WriteLine(--b); // Primero decrementa b a 5, luego muestra 5
+            Console.WriteLine(b);   // Muestra 5
             #endregion
         }
 
@@ -127,6 +172,29 @@ namespace EjemplosIntroductorios
             Console.WriteLine("Entero: " + numeroEntero + ", Decimal: " + numeroFlotante);
             Console.WriteLine($"Entero: {numeroEntero}, Decimal: {numeroDecimal}, Texto: {texto}, Booleano: {esVerdadero}, Carácter: {caracter}");
 
+        }
+    }
+}
+
+namespace Herramientas.Comunes { 
+    public class Conversor
+    {
+        public static int ConvertirAEntero(string valor)
+        {
+            return int.Parse(valor);
+        }
+    }
+}
+namespace Universidad {
+    namespace Postgrado { 
+        public class Tesis
+        {
+            public string titulo { get; set; }
+            public int anio { get; set; }
+            public Tesis(string titulo)
+            {
+                  this.titulo = titulo;
+            }
         }
     }
 }
