@@ -25,11 +25,40 @@ namespace EjemplosIntroductorios
         {
             // Inicializando una Persona
             Persona per = new Persona();
+            Persona per2 = new Persona("Pepe", "Perales", 27, true);
             Cliente c01 = new Cliente();
             Est e01 = new Est();
             Estudiante e02 = new Estudiante();
             Tesis t01 = new Tesis("analisis lógico");
             Herramientas.Comunes.Conversor conv = new Herramientas.Comunes.Conversor();
+
+            // Mostrar los objetos del tipo Persona
+            Console.WriteLine("Datos de las personas:");
+            Console.WriteLine($"Persona 1: {per.Nombre} {per.Apellido}, Edad: {per.Edad}, Casado: {per.Casado}");
+            Console.WriteLine($"Persona 2: {per2.Nombre} {per2.Apellido}, Edad: {per2.Edad}, Casado: {per2.Casado}");
+            // Usando los métodos de la clase Persona
+            per.Saludar();
+            per2.Saludar();
+            per.CumplirAnios();
+            per2.CumplirAnios();
+
+            per.Nombre = "Ana";
+            per.Apellido = "García";
+            per2.Apellido = "Pereira";
+            per2.Edad = -30;
+            per.Casado = true;
+            Console.WriteLine($"Persona 1: {per.Nombre} {per.Apellido}, Edad: {per.Edad}, Casado: {per.Casado}");
+            Console.WriteLine($"Persona 2: {per2.Nombre} {per2.Apellido}, Edad: {per2.Edad}, Casado: {per2.Casado}");
+
+            #region errores
+            // Error de sintaxis: Ej. falta punto y coma (;)
+
+            // Error de tiempo de ejecución: Ej. división por cero
+            //int div = 0;
+            //int x = 10 / div;
+
+            // Error semántico: Como edad -30
+            #endregion
         }
 
         private static void ejemplo3()
@@ -193,7 +222,12 @@ namespace Universidad {
             public int anio { get; set; }
             public Tesis(string titulo)
             {
-                  this.titulo = titulo;
+                this.titulo = titulo;
+                this.anio = DateTime.Now.Year;
+            }
+            public Tesis() {
+                titulo = "NO DEFINIDO";
+                anio = DateTime.Now.Year;
             }
         }
     }
