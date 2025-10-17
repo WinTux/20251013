@@ -27,8 +27,8 @@ namespace EjemplosIntroductorios
             Persona per = new Persona();
             Persona per2 = new Persona("Pepe", "Perales", 27, true);
             Cliente c01 = new Cliente();
-            Est e01 = new Est();
-            Estudiante e02 = new Estudiante();
+            Est e01 = new Est(123,"Economía","Chile");
+            Estudiante e02 = new Estudiante(123,"Linguística","Admin. empresas","Licenciatura");
             Tesis t01 = new Tesis("analisis lógico");
             Herramientas.Comunes.Conversor conv = new Herramientas.Comunes.Conversor();
 
@@ -50,6 +50,13 @@ namespace EjemplosIntroductorios
             Console.WriteLine($"Persona 1: {per.Nombre} {per.Apellido}, Edad: {per.Edad}, Casado: {per.Casado}");
             Console.WriteLine($"Persona 2: {per2.Nombre} {per2.Apellido}, Edad: {per2.Edad}, Casado: {per2.Casado}");
 
+            Empleado emp1 = new Empleado();
+            Console.WriteLine($"Empleado 1: {emp1.Nombre} {emp1.Apellido}, Edad: {emp1.Edad}, Casado: {emp1.Casado}, Cargo: {emp1.cargo}, Sueldo: {emp1.sueldo}");
+            emp1.MostrarInformacionLaboral();
+            emp1.CumplirAnios();
+            Cliente cli1 = new Cliente("Luis", "Martínez", 35, false, 123456);
+            cli1.CumplirAnios();
+
             #region errores
             // Error de sintaxis: Ej. falta punto y coma (;)
 
@@ -58,6 +65,59 @@ namespace EjemplosIntroductorios
             //int x = 10 / div;
 
             // Error semántico: Como edad -30
+            #endregion
+
+            // Arreglo de empleados
+            Empleado[] empleados = new Empleado[3];
+            empleados[0] = new Empleado("Carlos", "Lopez", 28, false, 2500.50, "Desarrollador");
+            empleados[1] = new Empleado("María", "González", 32, true, 3000.75, "Analista");
+            empleados[2] = new Empleado("Ana", "Ramírez", 26, false, 2200.00, "Diseñadora");
+            Console.WriteLine("Lista de empleados:");
+            foreach (Empleado emp in empleados)
+            {
+                string casadoTexto = emp.Casado ? "Sí" : "No";
+                Console.WriteLine($"Empleado: {emp.Nombre} {emp.Apellido}, Edad: {emp.Edad}, Casado: {casadoTexto}, Cargo: {emp.cargo}, Sueldo: {emp.sueldo}");
+
+                // Casteando a persona
+                Persona p = (Persona)emp;
+                p.Saludar();
+                p.CumplirAnios();
+                ((Empleado)p).sueldo = 6000;
+            }
+
+            // Arreglo de personas
+            Persona[] personas = new Persona[5];
+            personas[0] = new Persona("Luis", "Fernández", 40, true);
+            personas[1] = new Empleado("Carlos", "Lopez", 28, false, 2500.50, "Desarrollador");
+            personas[2] = new Cliente("Luis", "Martínez", 35, false, 123456);
+            personas[3] = new Persona("Ana", "García", 30, true);
+            personas[4] = new Empleado("María", "González", 32, true, 3000.75, "Analista");
+            Console.WriteLine("Lista de personas:");
+            foreach (Persona p in personas)
+            {
+                string casadoTexto = p.Casado ? "Sí" : "No";
+                Console.WriteLine($"Persona: {p.Nombre} {p.Apellido}, Edad: {p.Edad}, Casado: {casadoTexto}");
+            }
+            Console.WriteLine("Lista de personas (tratando de mostrar su sueldo):");
+            foreach (Persona pe in personas)
+            {
+                //Empleado p = pe as Empleado;
+                //Empleado p = (Empleado)pe;
+                Console.WriteLine($"Persona: {pe.Nombre} {pe.Apellido}");
+            }
+
+            #region Polimorfismo
+            Console.WriteLine("Demostración de polimorfismo:");
+            ICiudadano[] ciudadanos = new ICiudadano[3];
+            ciudadanos[0] = new Empleado("Pedro", "Sánchez", 45, true, 4000.00, "Gerente") { Pais = "España" };
+            ciudadanos[1] = new Est( 12222, "Ing. de sistemas", "Bolivia");
+            ciudadanos[2] = new Estudiante( 12228, "Maestría en Ciencias", "Matemático","Licenciatura");
+            foreach (ICiudadano ciudadano in ciudadanos)
+            {
+                Console.WriteLine($"Ciudadano de: {ciudadano.Pais}");
+                Console.WriteLine($"Nacionalidad: {ciudadano.ObtenerNacionalidad()}");
+                ciudadano.Votar("Partido de la Gente");
+            }
             #endregion
         }
 
