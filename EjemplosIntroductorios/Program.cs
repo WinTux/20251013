@@ -18,7 +18,130 @@ namespace EjemplosIntroductorios
 
             //ejemplo3();
 
-            ejemplo4();
+            //ejemplo4();
+
+            ejemplo5();
+        }
+
+        private static void ejemplo5()
+        {
+            // Estructuras de datos
+            #region Pilas (Stacks)
+            // Pila (Stack)
+            Stack<int> pila = new Stack<int>();
+            pila.Push(10); // Agrega 10 a la pila
+            pila.Push(20); // Agrega 20 a la pila
+            pila.Push(30); // Agrega 30 a la pila
+            Console.WriteLine("La pila tiene "+ pila.Count + " elementos.");
+            int elemento = pila.Pop(); // Elimina el elemento superior de la pila (30)
+            Console.WriteLine("La pila tiene " + pila.Count + " elementos.");
+            Console.WriteLine("Elemento extraído de la pila: " + elemento);
+            /*
+            int[] sueldos = new int[12];
+
+            sueldos[5] = 450;
+            */
+            // Mostrando los elementos restantes en la pila
+            Console.WriteLine("Elementos restantes en la pila:");
+            foreach (int item in pila)
+            {
+                Console.WriteLine(item);
+            }
+            // Mostrando los elementos pero con un comportamiento de pila
+            Stack<int> pila_auxiliar = new Stack<int>();
+            while (pila.Count > 0)
+            {
+                int elem = pila.Pop();
+                Console.WriteLine(elem);
+                pila_auxiliar.Push(elem);
+            }
+            // Restaurando la pila original
+            while (pila_auxiliar.Count > 0)
+            {
+                pila.Push(pila_auxiliar.Pop());
+            }
+            pila.Push(elemento);
+            Console.WriteLine("Después de restaurar, la pila tiene " + pila.Count + " elementos.");
+            while (pila.Count > 0)
+            {
+                int elem = pila.Pop();
+                Console.WriteLine(elem);
+                pila_auxiliar.Push(elem);
+            }
+            // Restaurando la pila original
+            while (pila_auxiliar.Count > 0)
+            {
+                pila.Push(pila_auxiliar.Pop());
+            }
+            pila.Push(elemento);
+            elemento = 700;
+            while (pila.Count > 0)
+            {
+                int elem = pila.Pop();
+                Console.WriteLine(elem);
+                pila_auxiliar.Push(elem);
+            }
+            // Restaurando la pila original
+            while (pila_auxiliar.Count > 0)
+            {
+                pila.Push(pila_auxiliar.Pop());
+            }
+
+            // Creando una pila de objetos Empleado
+            Stack<Empleado> pilaEmpleados = new Stack<Empleado>();
+            Empleado emp002 = new Empleado("María", "González", 32, true, 3000.75, "Analista");
+            pilaEmpleados.Push(new Empleado("Carlos", "Lopez", 28, false, 2500.50, "Desarrollador"));
+            pilaEmpleados.Push(emp002);
+            pilaEmpleados.Push(new Empleado("Ana", "Ramírez", 26, false, 2200.00, "Diseñadora"));
+            // Mostrando los empleados en la pila
+            Console.WriteLine("Empleados en la pila:");
+            Stack<Empleado> pilaAux = new Stack<Empleado>();
+            while (pilaEmpleados.Count > 0)
+            {
+                Empleado emp = pilaEmpleados.Pop();
+                Console.WriteLine($"Empleado: {emp.Nombre} {emp.Apellido}, Cargo: {emp.cargo}, Sueldo: {emp.sueldo}");
+                pilaAux.Push(emp);
+            }
+            while (pilaAux.Count > 0)
+                pilaEmpleados.Push(pilaAux.Pop());
+            emp002.Nombre = "María Fernanda";
+            emp002.Apellido = "Gómez";
+            emp002.sueldo = 5000.00;
+            // Lo usaré para cualquier otra cosa...
+            Console.WriteLine("Recorriendo nuevamente la pila:");
+            while (pilaEmpleados.Count > 0)
+            {
+                Empleado emp = pilaEmpleados.Pop();
+                Console.WriteLine($"Empleado: {emp.Nombre} {emp.Apellido}, Cargo: {emp.cargo}, Sueldo: {emp.sueldo}");
+                pilaAux.Push(emp);
+            }
+            while (pilaAux.Count > 0)
+                pilaEmpleados.Push(pilaAux.Pop());
+
+
+            #endregion
+
+            #region Colas (Queues)
+            // Cola (Queue)
+            Queue<string> cola = new Queue<string>();
+            cola.Enqueue("Primer elemento"); // Agrega un elemento al final de la cola
+            cola.Enqueue("Segundo elemento");
+            cola.Enqueue("Tercer elemento");
+            Console.WriteLine("La cola tiene " + cola.Count + " elementos.");
+            Console.WriteLine("Elementos en la cola:");
+            Queue<string> colaAuxiliar = new Queue<string>();
+            while (cola.Count > 0)
+            {
+                string elem = cola.Dequeue(); // Elimina el elemento al frente de la cola
+                Console.WriteLine(elem);
+                colaAuxiliar.Enqueue(elem);
+            }
+            // Restaurando la cola original
+            while (colaAuxiliar.Count > 0)
+            {
+                cola.Enqueue(colaAuxiliar.Dequeue());
+            }
+            #endregion
         }
 
         private static void ejemplo4()
