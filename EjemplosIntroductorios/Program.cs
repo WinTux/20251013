@@ -42,7 +42,9 @@ namespace EjemplosIntroductorios
             sueldos[5] = 450;
             */
             // Mostrando los elementos restantes en la pila
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("Elementos restantes en la pila:");
+            Console.ResetColor();
             foreach (int item in pila)
             {
                 Console.WriteLine(item);
@@ -61,7 +63,9 @@ namespace EjemplosIntroductorios
                 pila.Push(pila_auxiliar.Pop());
             }
             pila.Push(elemento);
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("Después de restaurar, la pila tiene " + pila.Count + " elementos.");
+            Console.ResetColor();
             while (pila.Count > 0)
             {
                 int elem = pila.Pop();
@@ -117,7 +121,17 @@ namespace EjemplosIntroductorios
             }
             while (pilaAux.Count > 0)
                 pilaEmpleados.Push(pilaAux.Pop());
-
+            // Usando Peek
+            Empleado empleadoTope = pilaEmpleados.Peek();
+            Console.WriteLine("Empleado en la cima de la pila (usando Peek): " + empleadoTope.Nombre + " " + empleadoTope.Apellido);
+            // Modificando el empleado en la cima
+            empleadoTope.sueldo = 8000.00;
+            Console.WriteLine("Después de modificar el sueldo del empleado en la cima:");
+            // Recorriendo nuevamente la pila
+            foreach (Empleado emp in pilaEmpleados)
+            {
+                Console.WriteLine($"Empleado: {emp.Nombre} {emp.Apellido}, Cargo: {emp.cargo}, Sueldo: {emp.sueldo}");
+            }
 
             #endregion
 
@@ -128,7 +142,9 @@ namespace EjemplosIntroductorios
             cola.Enqueue("Segundo elemento");
             cola.Enqueue("Tercer elemento");
             Console.WriteLine("La cola tiene " + cola.Count + " elementos.");
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("Elementos en la cola:");
+            Console.ResetColor();
             Queue<string> colaAuxiliar = new Queue<string>();
             while (cola.Count > 0)
             {
@@ -141,7 +157,110 @@ namespace EjemplosIntroductorios
             {
                 cola.Enqueue(colaAuxiliar.Dequeue());
             }
+
+            // peek
+            string primerElemento = cola.Peek();
+            Console.WriteLine("Primer elemento sin eliminar: " + primerElemento);
+            // modifiacndo valor
+            primerElemento = "Elemento modificado";
+            // Mostrando la cola con foreach
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("Elementos en la cola (usando foreach):");
+            Console.ResetColor();
+            foreach (string item in cola)
+            {
+                Console.WriteLine(item);
+            }
             #endregion
+
+            #region Listas (Lists)
+            // Lista (List)
+            List<double> listaSueldos = new List<double>();
+            listaSueldos.Add(2500.50);
+            listaSueldos.Add(3000.75);
+            listaSueldos.Add(2200.00);
+            // Cambiando color de texto en consola
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("Sueldos en la lista:");
+            Console.ResetColor();
+            foreach (double sueldo in listaSueldos)
+                Console.WriteLine(sueldo);
+            // Agregando un elemento en una posición específica
+            listaSueldos.Insert(1, 2800.00); // Inserta 2800.00 en la posición 1
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("Sueldos en la lista tras agregar un elemento nuevo:");
+            Console.ResetColor();
+            foreach (double sueldo in listaSueldos)
+                Console.WriteLine(sueldo);
+
+            // Eliminando un elemento
+            listaSueldos.RemoveAt(2); // Elimina el elemento en la posición 2
+            listaSueldos.Remove(2500.50); // Elimina el elemento con valor 2500.50
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("Sueldos en la lista tras eliminar un elemento:");
+            Console.ResetColor();
+            foreach (double sueldo in listaSueldos)
+                Console.WriteLine(sueldo);
+            #endregion
+
+            #region Listas de objetos
+            // Lista de objetos Empleado
+            List<Empleado> listaEmpleados = new List<Empleado>();
+            listaEmpleados.Add(new Empleado("Carlos", "Lopez", 28, false, 2500.50, "Desarrollador"));
+            listaEmpleados.Add(new Empleado("María", "González", 32, true, 3000.75, "Analista"));
+            listaEmpleados.Add(new Empleado("Ana", "Ramírez", 26, false, 2200.00, "Diseñadora"));
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("Empleados en la lista:");
+            Console.ResetColor();
+            foreach (Empleado emp in listaEmpleados)
+                Console.WriteLine($"Empleado: {emp.Nombre} {emp.Apellido}, Cargo: {emp.cargo}, Sueldo: {emp.sueldo}");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Intento fallido de eliminación");
+            Console.ResetColor();
+            listaEmpleados.Remove(new Empleado("María", "González", 32, true, 3000.75, "Analista"));
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("Empleados en la lista luego de intentar eliminar:");
+            Console.ResetColor();
+            foreach (Empleado emp in listaEmpleados)
+                Console.WriteLine($"Empleado: {emp.Nombre} {emp.Apellido}, Cargo: {emp.cargo}, Sueldo: {emp.sueldo}");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Eliminación exitosa usando Find y Remove");
+            Console.ResetColor();
+            Empleado empleadoAEliminar = listaEmpleados.Find(emp => emp.Nombre == "María" && emp.Apellido == "González");
+            // SELECT * FROM Empleados WHERE Nombre = 'María' AND Apellido = 'González'
+            if (empleadoAEliminar != null)
+            {
+                listaEmpleados.Remove(empleadoAEliminar);
+            }
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("Empleados en la lista luego de eliminar correctamente:");
+            Console.ResetColor();
+            foreach (Empleado emp in listaEmpleados)
+                Console.WriteLine($"Empleado: {emp.Nombre} {emp.Apellido}, Cargo: {emp.cargo}, Sueldo: {emp.sueldo}");
+            #endregion
+
+            // LINQ
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Uso de LINQ para filtrar empleados con sueldo mayor a 2400:");
+            Console.ResetColor();
+            var empleadosAltosSueldos = from emp in listaEmpleados
+                                       where emp.sueldo > 2400
+                                       select emp;
+            /*
+             SELECT
+                *
+             FROM
+                Empleados AS emp
+             WHERE
+                emp.sueldo > 2400
+             */
+            var pilita = new Stack<Empleado>();
+            var otraPilita = pilita;
+
+            // No lo voy a desglosar pero existe un tipo dinámico en C#:
+            dynamic variableDinamica = 123;
+            variableDinamica = "Ahora soy una cadena";
+
         }
 
         private static void ejemplo4()
